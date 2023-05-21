@@ -29,7 +29,7 @@ class OutputLayer(object):
         # remember the input for later backpropagation
         self.input = input
         # return the softmax of the input 
-        softmax = np.exp(input) / np.sum(np.exp(input), axis=0)
+        softmax = np.exp(input) / np.sum(np.exp(input), axis=1, keepdims=True)
         # e_x = np.exp(input - np.max(input))
         # softmax = e_x / e_x.sum()
         return softmax
@@ -174,19 +174,18 @@ if __name__=="__main__":
     X_test  = ((X_test  - offset) / scaling - 0.5) * 2.0
 
     # set hyperparameters (play with these!)
-    layer_sizes = [5, 5, n_classes]
+
     n_epochs = 5
     batch_size = 200
     learning_rate = 0.05
 
     # create network
-    networks = [MLP(n_features, layer_sizes),
-                MLP (n_features , [2 , 2 , n_classes ]),
+    networks = [MLP (n_features , [2 , 2 , n_classes ]),
                 MLP (n_features , [3 , 3 , n_classes ]),
                 MLP (n_features , [5 , 5 , n_classes ]),
                 MLP (n_features , [30 , 30 , n_classes ])]
-    
-    for i in range(5):
+    sizes = ["2, 2, 2", "3, 3, 2", "5, 5, 2", "30, 30, 2"]
+    for i in range(4):
         # train
         networks[i].train(X_train, Y_train, n_epochs, batch_size, learning_rate)
 
@@ -198,5 +197,5 @@ if __name__=="__main__":
         predicted_classes = np.argmax(predicted_posteriors, axis=1)
         # compute and output the error rate of predicted_classes
         error_rate = np.mean(predicted_classes != Y_test)
-        print("{}: error rate:{}".format(i, error_rate))
+        print("layer size [{}]: error rate:{}".format(sizes[i], error_rate))
 
