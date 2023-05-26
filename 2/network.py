@@ -28,7 +28,7 @@ class OutputLayer(object):
     def forward(self, input):
         # remember the input for later backpropagation
         self.input = input
-        # return the softmax of the input 
+        # return the softmax of the input (see formular in lecture) 
         softmax = np.exp(input) / np.sum(np.exp(input), axis=1, keepdims=True)
         # e_x = np.exp(input - np.max(input))
         # softmax = e_x / e_x.sum()
@@ -39,7 +39,7 @@ class OutputLayer(object):
         # (use cross-entropy loss and the chain rule for softmax,
         #  as derived in the lecture)
 
-        # Convert true_labels to one-hot encoding
+        # Convert true_labels to one-hot encoding to numerize the data
         true_labels_one_hot = np.eye(self.n_classes)[true_labels]
 
         # Compute the derivative of the cross-entropy loss with respect to the inputs
@@ -112,7 +112,7 @@ class MLP(object):
     def forward(self, X):
         # X is a mini-batch of instances
         batch_size = X.shape[0]
-        # flatten the other dimensions of X (in case instances are images)
+        # flatten the other dimensions of X 
         X = X.reshape(batch_size, -1)
 
         # compute the forward pass
@@ -179,7 +179,7 @@ if __name__=="__main__":
     batch_size = 200
     learning_rate = 0.05
 
-    # create network
+    # test the performance of different network structures
     networks = [MLP (n_features , [2 , 2 , n_classes ]),
                 MLP (n_features , [3 , 3 , n_classes ]),
                 MLP (n_features , [5 , 5 , n_classes ]),
