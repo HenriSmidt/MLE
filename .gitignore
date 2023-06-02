@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 MNIST/
+3/Abgabe/MNIST
+*ubyte
+*.gz
 # C extensions
 *.so
 
