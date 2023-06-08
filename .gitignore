@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 MNIST/
 3/Abgabe/MNIST
+datasets/
+4/Abgabe/datasets
 *ubyte
 *.gz
 # C extensions
