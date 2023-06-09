@@ -4,8 +4,8 @@ __pycache__/
 *$py.class
 MNIST/
 3/Abgabe/MNIST
-datasets/
-4/Abgabe/datasets
+hs_tomography/
+4/Abgabe/hs_tomography
 *ubyte
 *.gz
 # C extensions
